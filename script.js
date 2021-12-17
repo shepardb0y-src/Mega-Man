@@ -10,14 +10,14 @@ const player = {
   y: 0,
   framX: 0,
   frameY: 0,
-  height: 100,
-  width: 53,
+  height: 30,
+  width: 28,
   speed: 9,
   moving: false,
 };
 
 const playerSpriteImage = new Image();
-playerSpriteImage.src = "../images/megaman.png";
+playerSpriteImage.src = "../images/megaman-cropped.png";
 const background = new Image();
 background.src = "../images/boss-zone.png";
 console.log(background);
