@@ -6,18 +6,19 @@ canvas.height = 500;
 const keys = [];
 
 const player = {
-  x: 200,
+  x: 60,
   y: 200,
-  frameX: 7,
-  frameY: 7,
-  height: 28,
-  width: 28,
+  frameY: 8.7,
+  frameX: 0.5,
+  /// default about .2-.5 for width of sprite defualt for height 1.8 or 13 or count the rows on the image
+  height: 100,
+  width: 100,
   speed: 9,
   moving: false,
 };
 
 const playerSpriteImage = new Image();
-playerSpriteImage.src = "../images/megaman-cropped.png";
+playerSpriteImage.src = "../images/megaman.png";
 const background = new Image();
 background.src = "../images/boss-zone.png";
 console.log(background);
@@ -108,25 +109,30 @@ window.addEventListener(
 function moveSpriteup(param) {
   if (player.y > 45) {
     player.y -= player.speed;
-    player.frameY = 3;
+    player.frameX = 0.5;
+    player.frameY = 8.7;
   }
 }
 
 function moveSpritedown(param) {
   if (player.y < 450) {
     player.y += player.speed;
-    player.frameX = 4;
+    player.frameX = 0.5;
+    player.frameY = 8.7;
   }
 }
 
 function moveSpriteleft(param) {
   if (player.x > 5) {
     player.x -= player.speed;
+    player.frameX = 0.57;
   }
 }
 function moveSpriteright(param) {
   if (player.x < 750) {
     player.x += player.speed;
+    player.frameX = 0.5;
+    player.frameY = 8.7;
   }
 }
 
