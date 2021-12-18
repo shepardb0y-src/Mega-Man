@@ -106,21 +106,32 @@ window.addEventListener(
 );
 
 function moveSpriteup(param) {
-  if (player.y > 40) {
+  if (player.y > 45) {
     player.y -= player.speed;
     player.frameY = 3;
   }
 }
 
 function moveSpritedown(param) {
-  if (player.y > 150) {
+  if (player.y < 450) {
     player.y += player.speed;
+    player.frameX = 4;
   }
 }
 
 function moveSpriteleft(param) {
-  player.x -= player.speed;
+  if (player.x > 5) {
+    player.x -= player.speed;
+  }
 }
 function moveSpriteright(param) {
-  player.x += player.speed;
+  if (player.x < 750) {
+    player.x += player.speed;
+  }
 }
+
+// function boundry(){
+//   if(){
+
+//   }
+// }
