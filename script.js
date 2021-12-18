@@ -8,8 +8,8 @@ const keys = [];
 const player = {
   x: 200,
   y: 200,
-  framX: 0,
-  frameY: 0,
+  frameX: 7,
+  frameY: 7,
   height: 28,
   width: 28,
   speed: 9,
@@ -31,8 +31,10 @@ function animate() {
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
   drawSprite(
     playerSpriteImage,
-    0,
-    0,
+    player.width * player.frameX,
+    player.height * player.frameY,
+    // 0,
+    // 0,
     player.width,
     player.height,
     player.x,
@@ -104,11 +106,16 @@ window.addEventListener(
 );
 
 function moveSpriteup(param) {
-  player.y -= player.speed;
+  if (player.y > 40) {
+    player.y -= player.speed;
+    player.frameY = 3;
+  }
 }
 
 function moveSpritedown(param) {
-  player.y += player.speed;
+  if (player.y > 150) {
+    player.y += player.speed;
+  }
 }
 
 function moveSpriteleft(param) {
