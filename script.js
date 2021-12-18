@@ -104,11 +104,11 @@ window.addEventListener(
 );
 
 function moveSpriteup(param) {
-  player.y += player.speed;
+  player.y -= player.speed;
 }
 
 function moveSpritedown(param) {
-  player.y -= player.speed;
+  player.y += player.speed;
 }
 
 function moveSpriteleft(param) {
