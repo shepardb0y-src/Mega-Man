@@ -23,10 +23,10 @@ const enemy = {
   x: 620,
   y: 200,
   frameY: 0,
-  frameX: -0.3,
+  frameX: 0,
   /// default about .2-.5 for width of sprite defualt for height 1.8 or 13 or count the rows on the image
   height: 100,
-  width: 100,
+  width: 80,
   speed: 9,
   moving: false,
 };
@@ -58,6 +58,7 @@ function animate() {
     player.width,
     player.height
   );
+
   drawSprite(
     enemyImage,
     enemy.width * enemy.frameX,
@@ -71,6 +72,14 @@ function animate() {
     enemy.width,
     enemy.height
   );
+  // if (enemy.frameX < 8) {
+  //   enemy.frameX++;
+  // } else enemy.frameX = 0.5;
+  if (enemy.x < canvas.width + enemy.width) {
+    enemy.x += enemy.speed;
+  } else {
+    enemy.x = 0 - enemy.width;
+  }
   requestAnimationFrame(animate);
 }
 animate();
