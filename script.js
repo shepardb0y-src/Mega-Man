@@ -1,3 +1,5 @@
+///game background and character animation
+
 const canvas = document.querySelector("#canvas-0");
 const ctx = canvas.getContext("2d");
 console.log(canvas);
@@ -7,9 +9,21 @@ const keys = [];
 
 const player = {
   x: 60,
-  y: 200,
+  y: 400,
   frameY: 8.7,
   frameX: 0.5,
+  /// default about .2-.5 for width of sprite defualt for height 1.8 or 13 or count the rows on the image
+  height: 100,
+  width: 100,
+  speed: 9,
+  moving: false,
+};
+
+const enemy = {
+  x: 620,
+  y: 200,
+  frameY: 0,
+  frameX: -0.3,
   /// default about .2-.5 for width of sprite defualt for height 1.8 or 13 or count the rows on the image
   height: 100,
   width: 100,
@@ -21,7 +35,8 @@ const playerSpriteImage = new Image();
 playerSpriteImage.src = "../images/megaman.png";
 const background = new Image();
 background.src = "../images/boss-zone.png";
-console.log(background);
+const enemyImage = new Image();
+enemyImage.src = "../images/dr-willy.png";
 
 function drawSprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
@@ -43,11 +58,24 @@ function animate() {
     player.width,
     player.height
   );
-  // moveSprite();
+  drawSprite(
+    enemyImage,
+    enemy.width * enemy.frameX,
+    enemy.height * enemy.frameY,
+    // 0,
+    // 0,
+    enemy.width,
+    enemy.height,
+    enemy.x,
+    enemy.y,
+    enemy.width,
+    enemy.height
+  );
   requestAnimationFrame(animate);
 }
 animate();
 
+////key down action
 // window.addEventListener("keydown", function (e) {
 //   keys[e.keys] = true;
 //   console.log(e.keys);
@@ -107,15 +135,15 @@ window.addEventListener(
 );
 
 function moveSpriteup(param) {
-  if (player.y > 45) {
+  if (player.y > 0) {
     player.y -= player.speed;
-    player.frameX = 0.5;
-    player.frameY = 8.7;
+    player.frameX = 0.759;
+    player.frameY = 3.56;
   }
 }
 
 function moveSpritedown(param) {
-  if (player.y < 450) {
+  if (player.y < 400) {
     player.y += player.speed;
     player.frameX = 0.5;
     player.frameY = 8.7;
@@ -125,14 +153,15 @@ function moveSpritedown(param) {
 function moveSpriteleft(param) {
   if (player.x > 5) {
     player.x -= player.speed;
-    player.frameX = 0.57;
+    player.frameX = 5;
+    player.frameY = 23.2;
   }
 }
 function moveSpriteright(param) {
-  if (player.x < 750) {
+  if (player.x < 700) {
     player.x += player.speed;
-    player.frameX = 0.5;
-    player.frameY = 8.7;
+    player.frameX = 0.9;
+    player.frameY = 2.532;
   }
 }
 
