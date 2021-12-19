@@ -72,7 +72,7 @@ function animate() {
     enemy.width,
     enemy.height
   );
-  // if (enemy.frameX < 8) {
+  // if (enemy.frameX < 10) {
   //   enemy.frameX++;
   // } else enemy.frameX = 0.5;
   if (enemy.x < canvas.width + enemy.width) {
@@ -85,14 +85,6 @@ function animate() {
 animate();
 
 ////key down action
-// window.addEventListener("keydown", function (e) {
-//   keys[e.keys] = true;
-//   console.log(e.keys);
-// });
-
-// window.addEventListener("keyup", function (e) {
-//   delete keys[e.keys];
-// });
 
 window.addEventListener(
   "keydown",
@@ -174,8 +166,4 @@ function moveSpriteright(param) {
   }
 }
 
-// function boundry(){
-//   if(){
-
-//   }
-// }
+window.onload = setInterval(animate, 100 * 1000);
