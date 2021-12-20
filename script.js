@@ -167,3 +167,5 @@ function moveSpriteright(param) {
 }
 
 window.onload = setInterval(animate, 100 * 1000);
+
+/// Collision detection
