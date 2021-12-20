@@ -5,11 +5,10 @@ const ctx = canvas.getContext("2d");
 console.log(canvas);
 canvas.width = 800;
 canvas.height = 500;
-const keys = [];
 
 const player = {
   x: 60,
-  y: 400,
+  y: 100,
   frameY: 8.7,
   frameX: 0.5,
   /// default about .2-.5 for width of sprite defualt for height 1.8 or 13 or count the rows on the image
@@ -81,9 +80,9 @@ function animate() {
     enemy.x = 0 - enemy.width;
   }
   requestAnimationFrame(animate);
+  collision(player, enemy);
 }
 animate();
-
 ////key down action
 
 window.addEventListener(
@@ -169,3 +168,15 @@ function moveSpriteright(param) {
 window.onload = setInterval(animate, 100 * 1000);
 
 /// Collision detection
+function collision(a, b) {
+  if (
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
+  ) {
+    console.log("collision");
+  } else {
+    console.log("no collision");
+  }
+}
