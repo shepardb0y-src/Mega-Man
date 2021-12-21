@@ -8,7 +8,7 @@ canvas.height = 500;
 
 const player = {
   x: 60,
-  y: 100,
+  y: 400,
   frameY: 8.7,
   frameX: 0.5,
   /// default about .2-.5 for width of sprite defualt for height 1.8 or 13 or count the rows on the image
@@ -16,7 +16,7 @@ const player = {
   width: 100,
   speed: 9,
   moving: false,
-  missles: [],
+  alive: true,
   // shoot(array) {
   //   for (let i = 0; i < array.missles.length; i++) {
   //     array.missles.push(new Missles(4, 5, 0, 0, 100, 80, 9, true));
@@ -44,29 +44,45 @@ class Missles {
     this.color = color;
     this.velocity = velocity;
   }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+  show(ctx) {
+    ctx.lineWidth = 100;
+    ctx.strokeStyle = "#333";
     ctx.fillStyle = this.color;
-    ctx.fill();
+    ctx.fillRect(this.x, this.y, this.radius, this.color, this.velocity);
+  }
+  // draw(ctx) {
+  //   ctx.beginPath();
+  //   ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+  //   ctx.fillStyle = this.color;
+  //   ctx.fill();
+  // }
+}
+
+class Healthbar {
+  constructor(x, y, w, h, maxHealth, color) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.maxHealth = maxHealth;
+    this.maxWidth = w;
+    this.color = color;
+  }
+  show(ctx) {
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "blue";
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.strokeRect(this.x, this.y, this.maxWidth, this.h);
   }
 }
+let health = 100;
+const healthbar = new Healthbar(20, 20, 50, 30, 300, "red");
 
+// let misslescahe = [];
 // const missle = new Missles(player.x, player.y, 30, "blue", null);
-// missle.draw();
-let misslescahe = [];
+// function intitateMissles() {}
 
-function intitateMissles() {
-  const missle = new Missles(player.x, player.y, 30, "blue", null);
-  console.log(missle);
-}
-
-// function handlemissels() {
-//   for (let i = 0; i < misslescahe.length; i++) {
-//     misslescahe[i].draw();
-//   }
-// }
-// intitateMissles();
 const playerSpriteImage = new Image();
 playerSpriteImage.src = "../images/megaman.png";
 const background = new Image();
@@ -110,7 +126,8 @@ function animate() {
     enemy.width,
     enemy.height
   );
-
+  healthbar.show(ctx);
+  // missle.show(ctx);
   // if (enemy.frameX < 10) {
   //   enemy.frameX++;
   // } else enemy.frameX = 0.5;
@@ -173,7 +190,7 @@ window.addEventListener(
         // animatemissle();
         // console.log(animatemissle());
         // console.log(animate.missle);
-        intitateMissles();
+        // attaack();
         break;
       case "Esc": // IE/Edge specific value
       case "Escape":
@@ -219,6 +236,11 @@ function moveSpriteright(param) {
     player.frameY = 2.532;
   }
 }
+// function attack(param) {
+//   if (player.alive) {
+//     missle.show(ctx);
+//   }
+// }
 
 /// Collision detection
 function collision(a, b) {
