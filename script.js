@@ -16,6 +16,13 @@ const player = {
   width: 100,
   speed: 9,
   moving: false,
+  missles: [],
+  // shoot(array) {
+  //   for (let i = 0; i < array.missles.length; i++) {
+  //     array.missles.push(new Missles(4, 5, 0, 0, 100, 80, 9, true));
+  //     console.log(array.missles);
+  //   }
+  // },
 };
 
 const enemy = {
@@ -29,7 +36,40 @@ const enemy = {
   speed: 9,
   moving: false,
 };
+class Missles {
+  constructor(x, y, radius, color, velocity) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.color = color;
+    this.velocity = velocity;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
 
+// const missle = new Missles(player.x, player.y, 30, "blue", null);
+// missle.draw();
+let misslescahe = [];
+
+// function intitateMissles() {
+//   for (let i = 0; i < player.missles.length; i++) {
+//     player.missles.push(new Missles(4, 5, 0, 0, 100, 80, 9, true));
+//     console.log(player.missles);
+//   }
+// }
+// intitateMissles();
+
+// function handlemissels() {
+//   for (let i = 0; i < misslescahe.length; i++) {
+//     misslescahe[i].draw();
+//   }
+// }
+// intitateMissles();
 const playerSpriteImage = new Image();
 playerSpriteImage.src = "../images/megaman.png";
 const background = new Image();
@@ -57,7 +97,9 @@ function animate() {
     player.width,
     player.height
   );
-
+  const missle = new Missles(player.x, player.y, 30, "blue", null);
+  console.log(missle);
+  missle.draw();
   drawSprite(
     enemyImage,
     enemy.width * enemy.frameX,
@@ -71,6 +113,7 @@ function animate() {
     enemy.width,
     enemy.height
   );
+
   // if (enemy.frameX < 10) {
   //   enemy.frameX++;
   // } else enemy.frameX = 0.5;
@@ -79,12 +122,15 @@ function animate() {
   } else {
     enemy.x = 0 - enemy.width;
   }
+
   requestAnimationFrame(animate);
   collision(player, enemy);
+
+  // intitateMissles();
 }
 animate();
 ////key down action
-
+const missle = new Missles(player.x, player.y, 30, "blue", null);
 window.addEventListener(
   "keydown",
   function (event) {
@@ -119,6 +165,9 @@ window.addEventListener(
         break;
       case "Enter":
         // Do something for "enter" or "return" key press.
+        // const missle = new Missles(player.x, player.y, 30, "blue", null);
+        // missle.draw();
+        // console.log(missle.draw());
         break;
       case "Esc": // IE/Edge specific value
       case "Escape":
@@ -165,8 +214,6 @@ function moveSpriteright(param) {
   }
 }
 
-window.onload = setInterval(animate, 100 * 1000);
-
 /// Collision detection
 function collision(a, b) {
   if (
@@ -180,3 +227,5 @@ function collision(a, b) {
     console.log("no collision");
   }
 }
+
+window.onload = setInterval(animate, 100 * 1000);
