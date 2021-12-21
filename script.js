@@ -76,8 +76,8 @@ class Healthbar {
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.h);
   }
   updateHealth(val) {
-    this.health = val;
-    this.w = (this.health / this.maxWidth, this.h);
+    health = val;
+    this.w = this.w - 1;
   }
 }
 let health = 100;
@@ -281,7 +281,8 @@ function collision(a, b) {
     a.y + a.height > b.y
   ) {
     console.log("collision");
-    playerHealthbar.updateHealth(10);
+    health -= 10;
+    playerHealthbar.updateHealth(health);
   } else {
     console.log("no collision");
   }
