@@ -70,15 +70,33 @@ class Healthbar {
   }
   show(ctx) {
     ctx.lineWidth = 5;
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = "black";
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.h);
   }
 }
 let health = 100;
-const healthbar = new Healthbar(20, 20, 50, 30, 300, "red");
-
+const healthbarWidth = 200;
+const healthbarheight = 30;
+const x = 20;
+const y = 25;
+const playerHealthbar = new Healthbar(
+  x,
+  y,
+  healthbarWidth,
+  healthbarheight,
+  health,
+  "green"
+);
+const enemyHealthbar = new Healthbar(
+  580,
+  25,
+  healthbarWidth,
+  healthbarheight,
+  300,
+  "red"
+);
 // let misslescahe = [];
 // const missle = new Missles(player.x, player.y, 30, "blue", null);
 // function intitateMissles() {}
@@ -126,7 +144,8 @@ function animate() {
     enemy.width,
     enemy.height
   );
-  healthbar.show(ctx);
+  playerHealthbar.show(ctx);
+  enemyHealthbar.show(ctx);
   // missle.show(ctx);
   // if (enemy.frameX < 10) {
   //   enemy.frameX++;
