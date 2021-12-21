@@ -75,6 +75,10 @@ class Healthbar {
     ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.h);
   }
+  updateHealth(val) {
+    this.health = val;
+    this.w = (this.health / this.maxWidth, this.h);
+  }
 }
 let health = 100;
 const healthbarWidth = 200;
@@ -225,6 +229,13 @@ window.addEventListener(
   true
 );
 
+function damage() {
+  if (collision(player, enemy)) {
+    playerHealthbar.updateHealth();
+  } else {
+    enemyHealthbar.updateHealth();
+  }
+}
 function moveSpriteup(param) {
   if (player.y > 0) {
     player.y -= player.speed;
@@ -270,6 +281,7 @@ function collision(a, b) {
     a.y + a.height > b.y
   ) {
     console.log("collision");
+    playerHealthbar.updateHealth(10);
   } else {
     console.log("no collision");
   }
