@@ -56,13 +56,10 @@ class Missles {
 // missle.draw();
 let misslescahe = [];
 
-// function intitateMissles() {
-//   for (let i = 0; i < player.missles.length; i++) {
-//     player.missles.push(new Missles(4, 5, 0, 0, 100, 80, 9, true));
-//     console.log(player.missles);
-//   }
-// }
-// intitateMissles();
+function intitateMissles() {
+  const missle = new Missles(player.x, player.y, 30, "blue", null);
+  console.log(missle);
+}
 
 // function handlemissels() {
 //   for (let i = 0; i < misslescahe.length; i++) {
@@ -97,9 +94,9 @@ function animate() {
     player.width,
     player.height
   );
-  const missle = new Missles(player.x, player.y, 30, "blue", null);
-  console.log(missle);
-  missle.draw();
+  // const missle = new Missles(player.x, player.y, 30, "blue", null);
+  // console.log(missle);
+  // missle.draw();
   drawSprite(
     enemyImage,
     enemy.width * enemy.frameX,
@@ -129,8 +126,13 @@ function animate() {
   // intitateMissles();
 }
 animate();
+// function animatemissle() {
+//   const missle = new Missles(player.x, player.y, 30, "blue", null);
+//   missle.draw();
+// }
+
 ////key down action
-const missle = new Missles(player.x, player.y, 30, "blue", null);
+// const missle = new Missles(player.x, player.y, 30, "blue", null);
 window.addEventListener(
   "keydown",
   function (event) {
@@ -168,6 +170,10 @@ window.addEventListener(
         // const missle = new Missles(player.x, player.y, 30, "blue", null);
         // missle.draw();
         // console.log(missle.draw());
+        // animatemissle();
+        // console.log(animatemissle());
+        // console.log(animate.missle);
+        intitateMissles();
         break;
       case "Esc": // IE/Edge specific value
       case "Escape":
