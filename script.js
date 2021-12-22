@@ -208,17 +208,22 @@ window.addEventListener(
         player.missle.push({
           width: 20,
           height: 20,
-          x: player.x,
-          y: player.y,
+          x: player.x + 75,
+          y: player.y + 40,
           speedx: 20,
           speedy: 20,
         });
         for (let i = 0; i < player.missle.length; i++) {
-          player.missle[i].x = player.x + player.missle[i].x;
+          player.missle[i].x;
+          if (player.missle[i].x < canvas.width + player.missle[i].x.width) {
+            player.missle[i].x += player.speed;
+          } else {
+            player.missle[i].x += player.speed;
+          }
+
           // player.missle[i].x = player.x;
           // player.missle[i].y = player.y + player.missle[i].y;
           // console.log(player.missle[i].x);
-          i++;
         }
 
         break;
