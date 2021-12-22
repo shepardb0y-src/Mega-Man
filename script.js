@@ -17,6 +17,7 @@ const player = {
   speed: 9,
   moving: false,
   alive: true,
+  missle: [],
   // shoot(array) {
   //   for (let i = 0; i < array.missles.length; i++) {
   //     array.missles.push(new Missles(4, 5, 0, 0, 100, 80, 9, true));
@@ -36,27 +37,6 @@ const enemy = {
   speed: 9,
   moving: false,
 };
-class Missles {
-  constructor(x, y, radius, color, velocity) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
-    this.velocity = velocity;
-  }
-  show(ctx) {
-    ctx.lineWidth = 100;
-    ctx.strokeStyle = "#333";
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.radius, this.color, this.velocity);
-  }
-  // draw(ctx) {
-  //   ctx.beginPath();
-  //   ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-  //   ctx.fillStyle = this.color;
-  //   ctx.fill();
-  // }
-}
 
 class Healthbar {
   constructor(x, y, w, h, maxHealth, color) {
@@ -78,6 +58,14 @@ class Healthbar {
   updateHealth(val) {
     health = val;
     this.w = this.w - 1;
+    console.log(this.w);
+    // if (this.w === 0) {
+    //   prompt("try again or quit?");
+    //   alert("game over");
+    // } else if (this.w <= 1) {
+    //   console.log("keep playing");
+    // } else {
+    // }
   }
 }
 let health = 100;
@@ -159,9 +147,9 @@ function animate() {
   } else {
     enemy.x = 0 - enemy.width;
   }
-
-  requestAnimationFrame(animate);
+  drawMissle();
   collision(player, enemy);
+  requestAnimationFrame(animate);
 
   // intitateMissles();
 }
@@ -214,10 +202,26 @@ window.addEventListener(
         // console.log(animatemissle());
         // console.log(animate.missle);
         // attaack();
+
         break;
       case "Esc": // IE/Edge specific value
       case "Escape":
         // Do something for "esc" key press.
+        player.missle.push({
+          width: 20,
+          height: 20,
+          x: player.x + 100,
+          y: player.y + 37,
+          speedx: 20,
+          speedy: 20,
+        });
+        for (let i = 0; i < missle.length; i++) {
+          player.missle[i].x = player.x + player.missle[i].x;
+          player.missle[i].x = player.x;
+          player.missle[i].y = player.y + player.missle[i].y;
+          console.log(player.missle[l].x);
+        }
+
         break;
       default:
         return; // Quit when this doesn't handle the key event.
@@ -229,6 +233,18 @@ window.addEventListener(
   true
 );
 
+function drawMissle() {
+  if (player.missle.length)
+    for (var l = 0; l < player.missle.length; l++) {
+      ctx.fillStyle = "#f00";
+      ctx.fillRect(
+        player.missle[l].x,
+        player.missle[l].y,
+        player.missle[l].width,
+        player.missle[l].height
+      );
+    }
+}
 function damage() {
   if (collision(player, enemy)) {
     playerHealthbar.updateHealth();
@@ -281,8 +297,8 @@ function collision(a, b) {
     a.y + a.height > b.y
   ) {
     console.log("collision");
-    health -= 10;
-    playerHealthbar.updateHealth(health);
+
+    playerHealthbar.updateHealth();
   } else {
     console.log("no collision");
   }
