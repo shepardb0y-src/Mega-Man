@@ -1,5 +1,3 @@
-///game background and character animation
-
 const canvas = document.querySelector("#canvas-0");
 const ctx = canvas.getContext("2d");
 console.log(canvas);
@@ -210,16 +208,17 @@ window.addEventListener(
         player.missle.push({
           width: 20,
           height: 20,
-          x: player.x + 100,
-          y: player.y + 37,
+          x: player.x,
+          y: player.y,
           speedx: 20,
           speedy: 20,
         });
-        for (let i = 0; i < missle.length; i++) {
+        for (let i = 0; i < player.missle.length; i++) {
           player.missle[i].x = player.x + player.missle[i].x;
-          player.missle[i].x = player.x;
-          player.missle[i].y = player.y + player.missle[i].y;
-          console.log(player.missle[l].x);
+          // player.missle[i].x = player.x;
+          // player.missle[i].y = player.y + player.missle[i].y;
+          // console.log(player.missle[i].x);
+          i++;
         }
 
         break;
@@ -235,13 +234,13 @@ window.addEventListener(
 
 function drawMissle() {
   if (player.missle.length)
-    for (var l = 0; l < player.missle.length; l++) {
+    for (let i = 0; i < player.missle.length; i++) {
       ctx.fillStyle = "#f00";
       ctx.fillRect(
-        player.missle[l].x,
-        player.missle[l].y,
-        player.missle[l].width,
-        player.missle[l].height
+        player.missle[i].x,
+        player.missle[i].y,
+        player.missle[i].width,
+        player.missle[i].height
       );
     }
 }
