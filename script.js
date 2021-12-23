@@ -54,7 +54,7 @@ class Healthbar {
     ctx.fillRect(this.x, this.y, this.w, this.h);
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.h);
   }
-  updateHealth(val) {
+  updateHealthplayer(val) {
     health = val;
     this.w = this.w - 1;
     console.log(this.w);
@@ -65,6 +65,11 @@ class Healthbar {
     //   console.log("keep playing");
     // } else {
     // }
+  }
+  updateHealthenemy(val) {
+    health = val;
+    this.w = this.w - 15;
+    console.log(this.w);
   }
 }
 let health = 100;
@@ -150,8 +155,8 @@ function animate() {
   for (let i = 0; i < player.missle.length; i++) {
     player.m = player.missle[i];
   }
-
-  collision(player.m, enemy);
+  collisionenemy(enemy, player);
+  collisionplayer(player.m, enemy);
   requestAnimationFrame(animate);
 
   // intitateMissles();
@@ -219,7 +224,6 @@ window.addEventListener(
           speedy: 20,
         });
         for (let i = 0; i < player.missle.length; i++) {
-          player.missle[i].x;
           if (player.missle[i].x < canvas.width + player.missle[i].x.width) {
             player.missle[i].x += player.speed;
           } else {
@@ -298,7 +302,7 @@ function moveSpriteright(param) {
 // }
 
 /// Collision detection
-function collision(a, b) {
+function collisionplayer(a, b) {
   if (
     a.x < b.x + b.width &&
     a.x + a.width > b.x &&
@@ -307,10 +311,27 @@ function collision(a, b) {
   ) {
     console.log("collision");
 
-    enemyHealthbar.updateHealth();
+    enemyHealthbar.updateHealthenemy();
   } else {
     console.log("no collision");
+    // playerHealthbar.updateHealthplayer();
   }
 }
 
+function collisionenemy(a, b) {
+  if (
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
+  ) {
+    console.log("collision");
+    playerHealthbar.updateHealthplayer();
+    // enemyHealthbar.updateHealthenemy();
+  } else {
+    console.log("no collision");
+
+    // enemyHealthbar.updateHealthenemy();
+  }
+}
 window.onload = setInterval(animate, 100 * 1000);
