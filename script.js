@@ -22,6 +22,7 @@ const player = {
   //     console.log(array.missles);
   //   }
   // },
+  m: [],
 };
 
 const enemy = {
@@ -146,7 +147,11 @@ function animate() {
     enemy.x = 0 - enemy.width;
   }
   drawMissle();
-  collision(player, enemy);
+  for (let i = 0; i < player.missle.length; i++) {
+    player.m = player.missle[i];
+  }
+
+  collision(player.m, enemy);
   requestAnimationFrame(animate);
 
   // intitateMissles();
@@ -302,7 +307,7 @@ function collision(a, b) {
   ) {
     console.log("collision");
 
-    playerHealthbar.updateHealth();
+    enemyHealthbar.updateHealth();
   } else {
     console.log("no collision");
   }
