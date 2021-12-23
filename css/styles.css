@@ -12,3 +12,29 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.hide {
+  display: none;
+}
+
+#body {
+  display: flex;
+  justify-content: center;
+}
+#body #StartScreen {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+button {
+  font-size: 200%;
+}
+
+#StartScreen h1 {
+  margin-left: 10%;
+}
+
+#StartScreen p {
+  margin-left: 30%;
+  font-size: 150%;
+}
