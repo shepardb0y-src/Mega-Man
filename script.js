@@ -16,12 +16,6 @@ const player = {
   moving: false,
   alive: true,
   missle: [],
-  // shoot(array) {
-  //   for (let i = 0; i < array.missles.length; i++) {
-  //     array.missles.push(new Missles(4, 5, 0, 0, 100, 80, 9, true));
-  //     console.log(array.missles);
-  //   }
-  // },
   m: [],
 };
 
@@ -38,7 +32,7 @@ const enemy = {
 };
 
 class Healthbar {
-  constructor(x, y, w, h, maxHealth, color) {
+  constructor(x, y, w, h, maxHealth, color, health) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -46,6 +40,7 @@ class Healthbar {
     this.maxHealth = maxHealth;
     this.maxWidth = w;
     this.color = color;
+    this.health = health;
   }
   show(ctx) {
     ctx.lineWidth = 5;
@@ -57,21 +52,39 @@ class Healthbar {
   updateHealthplayer(val) {
     health = val;
     this.w = this.w - 1;
-    console.log(this.w);
-    // if (this.w === 0) {
-    //   prompt("try again or quit?");
-    //   alert("game over");
-    // } else if (this.w <= 1) {
-    //   console.log("keep playing");
-    // } else {
-    // }
+    // console.log(this.w);
+    health = this.w;
+    console.log(health);
+    if (health === 0) {
+      prompt("game");
+    } else {
+      console.log("carry on");
+    }
   }
   updateHealthenemy(val) {
-    health = val;
-    this.w = this.w - 15;
-    console.log(this.w);
+    enemyhealth = val;
+    this.w = this.w - 20;
+    enemyhealth = this.w;
+    console.log(health);
+    if (enemyhealth === 0) {
+      /// second round method should get called here
+      prompt("You Win");
+    } else {
+      console.log("carry on");
+    }
   }
 }
+// game(val) {
+//   health = val;
+//   if (this.health === 100) {
+//     player.alive = false;
+//     console.log(player.alive);
+//   } else {
+//     player.alive = false;
+//     console.log(player.alive);
+//   }
+// }
+
 let health = 100;
 const healthbarWidth = 200;
 const healthbarheight = 30;
@@ -85,14 +98,16 @@ const playerHealthbar = new Healthbar(
   health,
   "green"
 );
+let enemyhealth = 300;
 const enemyHealthbar = new Healthbar(
   580,
   25,
   healthbarWidth,
   healthbarheight,
-  300,
+  enemyhealth,
   "red"
 );
+// playerHealthbar.game();
 // let misslescahe = [];
 // const missle = new Missles(player.x, player.y, 30, "blue", null);
 // function intitateMissles() {}
@@ -258,13 +273,13 @@ function drawMissle() {
       );
     }
 }
-function damage() {
-  if (collision(player, enemy)) {
-    playerHealthbar.updateHealth();
-  } else {
-    enemyHealthbar.updateHealth();
-  }
-}
+// function damage() {
+//   if (collision(player, enemy)) {
+//     playerHealthbar.updateHealth();
+//   } else {
+//     enemyHealthbar.updateHealth();
+//   }
+// }
 function moveSpriteup(param) {
   if (player.y > 0) {
     player.y -= player.speed;
@@ -334,4 +349,5 @@ function collisionenemy(a, b) {
     // enemyHealthbar.updateHealthenemy();
   }
 }
+// game();
 window.onload = setInterval(animate, 100 * 1000);
