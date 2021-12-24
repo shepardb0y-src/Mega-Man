@@ -3,6 +3,15 @@ const ctx = canvas.getContext("2d");
 console.log(canvas);
 canvas.width = 800;
 canvas.height = 500;
+const start = document.querySelector("#StartButton");
+const splash = document.querySelector("#SplashScreen");
+const game = {
+  start: () => {
+    // console.log('We are starting a game!')
+    canvas.classList.add("hide");
+    canvas.classList.remove("hide");
+  },
+};
 
 const player = {
   x: 60,
@@ -63,7 +72,7 @@ class Healthbar {
   }
   updateHealthenemy(val) {
     enemyhealth = val;
-    this.w = this.w - 20;
+    this.w = this.w - 2;
     enemyhealth = this.w;
     console.log(health);
     if (enemyhealth === 0) {
