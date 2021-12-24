@@ -11,6 +11,7 @@ const game = {
     canvas.classList.add("hide");
     canvas.classList.remove("hide");
   },
+  overallround: [],
 };
 
 const player = {
@@ -78,10 +79,20 @@ class Healthbar {
     if (enemyhealth === 0) {
       /// second round method should get called here
       prompt("You Win");
+      playerHealthbar.restart();
     } else {
       console.log("carry on");
     }
   }
+  // restart() {
+  //   if (enemyhealth === 0) {
+  //     prompt("restart");
+  //   } else {
+  //     cocnsole.log("carry on");
+  //     player.playerHealthbar = 100;
+  //     enemy.enemyHealthbar = 300;
+  //   }
+  // }
 }
 // game(val) {
 //   health = val;
