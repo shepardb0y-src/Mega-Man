@@ -65,7 +65,7 @@ class Healthbar {
     // console.log(this.w);
     health = this.w;
     console.log(health);
-    if (health === 0) {
+    if (health <= 0) {
       prompt("game");
     } else {
       console.log("carry on");
@@ -73,26 +73,35 @@ class Healthbar {
   }
   updateHealthenemy(val) {
     enemyhealth = val;
-    this.w = this.w - 2;
+    this.w = this.w - 5;
     enemyhealth = this.w;
     console.log(health);
+    if (enemyhealth <= 0) {
+      game.overallround.push([1]);
+      console.log(game.overallround.length);
+      enemyHealthbar.restart();
+    }
+
+    // if (enemyhealth <= 0) {
+    //   /// second round method should get called here
+    //   // prompt("You Win");
+    //   // playerHealthbar.restart();
+    // } else {
+    //   console.log("carry on");
+    // }
+  }
+  restart() {
     if (enemyhealth === 0) {
-      /// second round method should get called here
-      prompt("You Win");
-      playerHealthbar.restart();
+      newhealth;
+      enemyhealth = newhealth;
+      this.w = newhealth;
+      console.log(`${this.w} here `);
     } else {
       console.log("carry on");
+      // player.playerHealthbar = 100;
+      // enemy.enemyHealthbar = 300;
     }
   }
-  // restart() {
-  //   if (enemyhealth === 0) {
-  //     prompt("restart");
-  //   } else {
-  //     cocnsole.log("carry on");
-  //     player.playerHealthbar = 100;
-  //     enemy.enemyHealthbar = 300;
-  //   }
-  // }
 }
 // game(val) {
 //   health = val;
@@ -104,7 +113,7 @@ class Healthbar {
 //     console.log(player.alive);
 //   }
 // }
-
+let newhealth = 200;
 let health = 100;
 const healthbarWidth = 200;
 const healthbarheight = 30;
