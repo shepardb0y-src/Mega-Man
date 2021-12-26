@@ -61,14 +61,14 @@ class Healthbar {
   }
   updateHealthplayer(val) {
     health = val;
-    this.w = this.w - 1;
+    this.w = this.w - 5;
     // console.log(this.w);
     health = this.w;
     console.log(health);
     if (health <= 0) {
-      prompt("game");
-    } else {
-      console.log("carry on");
+      game.overallround.push([1]);
+      console.log(game.overallround.length);
+      playerHealthbar.restart();
     }
   }
   updateHealthenemy(val) {
@@ -91,13 +91,16 @@ class Healthbar {
     // }
   }
   restart() {
-    if (enemyhealth === 0) {
+    if (this.w === 0) {
       newhealth;
       enemyhealth = newhealth;
       this.w = newhealth;
       console.log(`${this.w} here `);
-    } else {
-      console.log("carry on");
+    } else if (this.w === 0) {
+      newhealth;
+      health = newhealth;
+      this.w = newhealth;
+      console.log(`${this.w} here `);
       // player.playerHealthbar = 100;
       // enemy.enemyHealthbar = 300;
     }
