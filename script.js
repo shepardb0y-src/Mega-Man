@@ -11,7 +11,18 @@ const game = {
     canvas.classList.add("hide");
     canvas.classList.remove("hide");
   },
-  overallround: [],
+  playerround: "",
+  enemyround: "",
+  win() {
+    if (player.alive && !enemy.alive) {
+      prompt("player wins");
+      console.log("winn conditoion");
+    } else if (game.enemyround === 1) {
+      prompt("enemy wins Game over");
+    } else {
+      console.log("keep playing");
+    }
+  },
 };
 
 const player = {
@@ -39,6 +50,7 @@ const enemy = {
   width: 80,
   speed: 9,
   moving: false,
+  alive: true,
 };
 
 class Healthbar {
@@ -66,8 +78,6 @@ class Healthbar {
     health = this.w;
     console.log(health);
     if (health <= 0) {
-      game.overallround.push([1]);
-      console.log(game.overallround.length);
       playerHealthbar.restart();
     }
   }
@@ -77,8 +87,6 @@ class Healthbar {
     enemyhealth = this.w;
     console.log(health);
     if (enemyhealth <= 0) {
-      game.overallround.push([1]);
-      console.log(game.overallround.length);
       enemyHealthbar.restart();
     }
 
@@ -91,18 +99,27 @@ class Healthbar {
     // }
   }
   restart() {
-    if (this.w === 0) {
+    if (enemy.alive && this.w === 0 && !game.playerround) {
       newhealth;
       enemyhealth = newhealth;
       this.w = newhealth;
-      console.log(`${this.w} here `);
-    } else if (this.w === 0) {
+      game.playerround = 1;
+      enemy.alive = false;
+      console.log(enemy.alive);
+      // console.log(game.playerround.length);
+      // console.log(`${this.w} here `);
+    } else if (!enemy.alive && this.w === 0 && game.playerround) {
       newhealth;
       health = newhealth;
       this.w = newhealth;
-      console.log(`${this.w} here `);
+      // game.enemyround.push("1");
+      console.log(game.enemyround.length);
+      alert("game over two health bars depleted");
+      console.log(`else if here `);
       // player.playerHealthbar = 100;
       // enemy.enemyHealthbar = 300;
+    } else {
+      console.log("keep playing");
     }
   }
 }
@@ -381,5 +398,6 @@ function collisionenemy(a, b) {
     // enemyHealthbar.updateHealthenemy();
   }
 }
+game.win();
 // game();
 window.onload = setInterval(animate, 100 * 1000);
