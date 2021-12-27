@@ -121,14 +121,24 @@ class Healthbar {
       prompt("game continues ");
       console.log("winn conditoion");
     }
-    if (!enemy.alive && this.w === 0) {
+    if (!enemy.alive && this.w === 0 && !game.enemyround) {
       newhealth;
       health = newhealth;
       this.w = newhealth;
       game.enemyround = 1;
+      game.playerround = 1;
       player.alive = false;
       console.log(game.enemyround);
       prompt("endround 2");
+    }
+    if (player.alive && this.w === 0 && game.playerround) {
+      newhealth;
+      health = newhealth;
+      this.w = newhealth;
+
+      player.alive = false;
+      console.log(game.enemyround);
+      prompt("endround 3");
     }
     // alert("game over two health bars depleted");
     if (player.alive && enemy.alive) {
