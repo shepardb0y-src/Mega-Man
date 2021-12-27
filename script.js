@@ -13,16 +13,16 @@ const game = {
   },
   playerround: "",
   enemyround: "",
-  win() {
-    if (player.alive && !enemy.alive) {
-      prompt("player wins");
-      console.log("winn conditoion");
-    } else if (game.enemyround === 1) {
-      prompt("enemy wins Game over");
-    } else {
-      console.log("keep playing");
-    }
-  },
+  // win() {
+  //   if (player.alive && !enemy.alive) {
+  //     prompt("player wins");
+  //     console.log("winn conditoion");
+  //   } else if (game.enemyround === 1) {
+  //     prompt("enemy wins Game over");
+  //   } else {
+  //     console.log("keep playing");
+  //   }
+  // },
 };
 
 const player = {
@@ -73,7 +73,7 @@ class Healthbar {
   }
   updateHealthplayer(val) {
     health = val;
-    this.w = this.w - 5;
+    this.w = this.w - 2;
     // console.log(this.w);
     health = this.w;
     console.log(health);
@@ -99,40 +99,49 @@ class Healthbar {
     // }
   }
   restart() {
-    if (enemy.alive && this.w === 0 && !game.playerround) {
+    // if (player.w === 0 && player.missle) {
+    //   player.alive = false;
+    // }
+    if (enemy.alive && this.w === 0) {
       newhealth;
       enemyhealth = newhealth;
       this.w = newhealth;
       game.playerround = 1;
       enemy.alive = false;
       console.log(enemy.alive);
-      // console.log(game.playerround.length);
+      console.log(game.playerround);
+      prompt("end of first round");
       // console.log(`${this.w} here `);
-    } else if (!enemy.alive && this.w === 0 && game.playerround) {
+    }
+    if (!player.alive && !enemy.alive) {
+      prompt(" game over");
+      console.log("winn conditoion");
+    }
+    if (player.alive && !enemy.alive) {
+      prompt("game continues ");
+      console.log("winn conditoion");
+    }
+    if (!enemy.alive && this.w === 0) {
       newhealth;
       health = newhealth;
       this.w = newhealth;
-      // game.enemyround.push("1");
-      console.log(game.enemyround.length);
-      alert("game over two health bars depleted");
-      console.log(`else if here `);
-      // player.playerHealthbar = 100;
-      // enemy.enemyHealthbar = 300;
-    } else {
-      console.log("keep playing");
+      game.enemyround = 1;
+      player.alive = false;
+      console.log(game.enemyround);
+      prompt("endround 2");
     }
+    // alert("game over two health bars depleted");
+    if (player.alive && enemy.alive) {
+      prompt("player wins");
+      console.log("winn conditoion");
+    }
+    // if (player.alive || enemy.alive) {
+    //   prompt("gameover");
+    //   // player.alive = true;
+    // }
   }
 }
-// game(val) {
-//   health = val;
-//   if (this.health === 100) {
-//     player.alive = false;
-//     console.log(player.alive);
-//   } else {
-//     player.alive = false;
-//     console.log(player.alive);
-//   }
-// }
+
 let newhealth = 200;
 let health = 100;
 const healthbarWidth = 200;
@@ -156,10 +165,6 @@ const enemyHealthbar = new Healthbar(
   enemyhealth,
   "red"
 );
-// playerHealthbar.game();
-// let misslescahe = [];
-// const missle = new Missles(player.x, player.y, 30, "blue", null);
-// function intitateMissles() {}
 
 const playerSpriteImage = new Image();
 playerSpriteImage.src = "../images/megaman.png";
@@ -188,9 +193,7 @@ function animate() {
     player.width,
     player.height
   );
-  // const missle = new Missles(player.x, player.y, 30, "blue", null);
-  // console.log(missle);
-  // missle.draw();
+
   drawSprite(
     enemyImage,
     enemy.width * enemy.frameX,
@@ -222,17 +225,9 @@ function animate() {
   collisionenemy(enemy, player);
   collisionplayer(player.m, enemy);
   requestAnimationFrame(animate);
-
-  // intitateMissles();
 }
 animate();
-// function animatemissle() {
-//   const missle = new Missles(player.x, player.y, 30, "blue", null);
-//   missle.draw();
-// }
 
-////key down action
-// const missle = new Missles(player.x, player.y, 30, "blue", null);
 window.addEventListener(
   "keydown",
   function (event) {
@@ -322,13 +317,7 @@ function drawMissle() {
       );
     }
 }
-// function damage() {
-//   if (collision(player, enemy)) {
-//     playerHealthbar.updateHealth();
-//   } else {
-//     enemyHealthbar.updateHealth();
-//   }
-// }
+
 function moveSpriteup(param) {
   if (player.y > 0) {
     player.y -= player.speed;
@@ -359,11 +348,6 @@ function moveSpriteright(param) {
     player.frameY = 2.532;
   }
 }
-// function attack(param) {
-//   if (player.alive) {
-//     missle.show(ctx);
-//   }
-// }
 
 /// Collision detection
 function collisionplayer(a, b) {
@@ -398,6 +382,6 @@ function collisionenemy(a, b) {
     // enemyHealthbar.updateHealthenemy();
   }
 }
-game.win();
-// game();
+// game.win();
+
 window.onload = setInterval(animate, 100 * 1000);
