@@ -78,7 +78,7 @@ class Healthbar {
     health = this.w;
     console.log(health);
     if (health <= 0) {
-      playerHealthbar.restart();
+      playerHealthbar.restartplayer();
     }
   }
   updateHealthenemy(val) {
@@ -87,18 +87,10 @@ class Healthbar {
     enemyhealth = this.w;
     console.log(health);
     if (enemyhealth <= 0) {
-      enemyHealthbar.restart();
+      enemyHealthbar.restartenemy();
     }
-
-    // if (enemyhealth <= 0) {
-    //   /// second round method should get called here
-    //   // prompt("You Win");
-    //   // playerHealthbar.restart();
-    // } else {
-    //   console.log("carry on");
-    // }
   }
-  restart() {
+  restartplayer() {
     // if (player.w === 0 && player.missle) {
     //   player.alive = false;
     // }
@@ -107,52 +99,60 @@ class Healthbar {
       enemyhealth = newhealth;
       this.w = newhealth;
       game.playerround = 1;
-      enemy.alive = false;
+      player.alive = false;
       console.log(enemy.alive);
       console.log(game.playerround);
-      alert("end of first round");
+      location.reload();
+      alert("enemy wins");
       // console.log(`${this.w} here `);
+    } else if (enemy.alive && player.alive) {
+      alert("both dead");
     }
-    if (!player.alive && !enemy.alive) {
-      // location.reload();
-      ctx.font = "200px comic Sans";
-      ctx.fillStyle = "gold";
-      ctx.fillText("game over", 10, 150);
-      // alert(" game over");
-      console.log("winn conditoion");
-    }
-    if (player.alive && !enemy.alive) {
-      alert("game continues ");
-      console.log("winn conditoion");
-    }
-    if (!enemy.alive && this.w === 0 && !game.enemyround) {
-      newhealth;
-      health = newhealth;
-      this.w = newhealth;
-      game.enemyround = 1;
-      game.playerround = 1;
-      player.alive = false;
-      console.log(game.enemyround);
-      alert("endround 2");
-    }
-    // if (player.alive && this.w === 0 && game.playerround) {
+    // if (!player.alive && !enemy.alive) {
+    //   // location.reload();
+    //   ctx.font = "200px comic Sans";
+    //   ctx.fillStyle = "gold";
+    //   ctx.fillText("game over", 10, 150);
+    //   // alert(" game over");
+    //   console.log("winn conditoion");
+    // }
+    // if (player.alive && !enemy.alive) {
+    //   alert("game continues ");
+    //   console.log("winn conditoion");
+    // }
+    // if (!enemy.alive && this.w === 0 && !game.enemyround) {
     //   newhealth;
     //   health = newhealth;
     //   this.w = newhealth;
-
+    //   game.enemyround = 1;
+    //   game.playerround = 1;
     //   player.alive = false;
     //   console.log(game.enemyround);
-    //   prompt("endround 3");
+    //   alert("endround 2");
     // }
-    // alert("game over two health bars depleted");
-    if (player.alive && enemy.alive) {
+
+    // if (player.alive && enemy.alive) {
+    //   alert("player wins");
+    //   console.log("winn conditoion");
+    // }
+  }
+  restartenemy() {
+    if (player.alive && this.w === 0) {
+      newhealth;
+      enemyhealth = newhealth;
+      this.w = newhealth;
+      game.playerround = 1;
+      enemy.alive = false;
+      console.log(enemy.alive);
+      console.log(game.playerround);
+
+      ctx.font = "200px comic Sans";
+      ctx.fillStyle = "orange";
+      ctx.fillText("game over", 10, 300);
+      location.reload();
+
       alert("player wins");
-      console.log("winn conditoion");
     }
-    // if (player.alive || enemy.alive) {
-    //   prompt("gameover");
-    //   // player.alive = true;
-    // }
   }
 }
 
