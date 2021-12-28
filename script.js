@@ -114,6 +114,7 @@ class Healthbar {
       // console.log(`${this.w} here `);
     }
     if (!player.alive && !enemy.alive) {
+      location.reload();
       prompt(" game over");
       console.log("winn conditoion");
     }
@@ -131,15 +132,15 @@ class Healthbar {
       console.log(game.enemyround);
       prompt("endround 2");
     }
-    if (player.alive && this.w === 0 && game.playerround) {
-      newhealth;
-      health = newhealth;
-      this.w = newhealth;
+    // if (player.alive && this.w === 0 && game.playerround) {
+    //   newhealth;
+    //   health = newhealth;
+    //   this.w = newhealth;
 
-      player.alive = false;
-      console.log(game.enemyround);
-      prompt("endround 3");
-    }
+    //   player.alive = false;
+    //   console.log(game.enemyround);
+    //   prompt("endround 3");
+    // }
     // alert("game over two health bars depleted");
     if (player.alive && enemy.alive) {
       prompt("player wins");
