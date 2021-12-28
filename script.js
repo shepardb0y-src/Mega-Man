@@ -13,16 +13,6 @@ const game = {
   },
   playerround: "",
   enemyround: "",
-  // win() {
-  //   if (player.alive && !enemy.alive) {
-  //     prompt("player wins");
-  //     console.log("winn conditoion");
-  //   } else if (game.enemyround === 1) {
-  //     prompt("enemy wins Game over");
-  //   } else {
-  //     console.log("keep playing");
-  //   }
-  // },
 };
 
 const player = {
@@ -229,10 +219,6 @@ function animate() {
   ctx.font = "30px Arial";
   ctx.fillText("Dr.Willy", 680, 25);
 
-  // missle.show(ctx);
-  // if (enemy.frameX < 10) {
-  //   enemy.frameX++;
-  // } else enemy.frameX = 0.5;
   if (enemy.x < canvas.width + enemy.width) {
     enemy.x += enemy.speed;
   } else {
@@ -242,6 +228,7 @@ function animate() {
   for (let i = 0; i < player.missle.length; i++) {
     player.m = player.missle[i];
   }
+  movemissle();
   collisionenemy(enemy, player);
   collisionplayer(player.m, enemy);
   requestAnimationFrame(animate);
@@ -337,7 +324,13 @@ function drawMissle() {
       );
     }
 }
-
+function movemissle() {
+  for (let i = 0; i < player.missle.length; i++) {
+    if (player.missle[i].x > 10) {
+      player.missle[i].x += player.missle[i].speedx;
+    }
+  }
+}
 function moveSpriteup(param) {
   if (player.y > 0) {
     player.y -= player.speed;
