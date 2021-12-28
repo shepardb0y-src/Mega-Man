@@ -4,7 +4,7 @@ console.log(canvas);
 canvas.width = 800;
 canvas.height = 500;
 const start = document.querySelector("#StartButton");
-const splash = document.querySelector("#SplashScreen");
+
 const game = {
   start: () => {
     // console.log('We are starting a game!')
@@ -220,6 +220,12 @@ function animate() {
   );
   playerHealthbar.show(ctx);
   enemyHealthbar.show(ctx);
+  ctx.font = "30px comic Sans";
+  ctx.fillStyle = "gold";
+  ctx.fillText("Mega-Man", 11, 21);
+  ctx.font = "30px Arial";
+  ctx.fillText("Dr.Willy", 680, 25);
+
   // missle.show(ctx);
   // if (enemy.frameX < 10) {
   //   enemy.frameX++;
