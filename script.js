@@ -110,16 +110,19 @@ class Healthbar {
       enemy.alive = false;
       console.log(enemy.alive);
       console.log(game.playerround);
-      prompt("end of first round");
+      alert("end of first round");
       // console.log(`${this.w} here `);
     }
     if (!player.alive && !enemy.alive) {
-      location.reload();
-      prompt(" game over");
+      // location.reload();
+      ctx.font = "200px comic Sans";
+      ctx.fillStyle = "gold";
+      ctx.fillText("game over", 10, 150);
+      // alert(" game over");
       console.log("winn conditoion");
     }
     if (player.alive && !enemy.alive) {
-      prompt("game continues ");
+      alert("game continues ");
       console.log("winn conditoion");
     }
     if (!enemy.alive && this.w === 0 && !game.enemyround) {
@@ -130,7 +133,7 @@ class Healthbar {
       game.playerround = 1;
       player.alive = false;
       console.log(game.enemyround);
-      prompt("endround 2");
+      alert("endround 2");
     }
     // if (player.alive && this.w === 0 && game.playerround) {
     //   newhealth;
@@ -143,7 +146,7 @@ class Healthbar {
     // }
     // alert("game over two health bars depleted");
     if (player.alive && enemy.alive) {
-      prompt("player wins");
+      alert("player wins");
       console.log("winn conditoion");
     }
     // if (player.alive || enemy.alive) {
