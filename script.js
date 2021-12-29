@@ -174,9 +174,11 @@ const playerSpriteImage = new Image();
 playerSpriteImage.src =
   "http://www.sprites-inc.co.uk/files/Classic/Megaman/MvC/m-mmmcsheet.gif";
 const background = new Image();
-background.src = "../images/boss-zone.png";
+background.src =
+  "http://www.sprites-inc.co.uk/files/Classic/RMCW/Backgrounds/bg1.gif";
 const enemyImage = new Image();
-enemyImage.src = "../images/dr-willy.png";
+enemyImage.src =
+  "http://www.sprites-inc.co.uk/files/Zero/Weil/Battle_Armour_1/zero_z4weil_final_1.png";
 
 function drawSprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
