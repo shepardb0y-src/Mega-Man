@@ -171,7 +171,8 @@ const enemyHealthbar = new Healthbar(
 );
 
 const playerSpriteImage = new Image();
-playerSpriteImage.src = "../images/megaman.png";
+playerSpriteImage.src =
+  "http://www.sprites-inc.co.uk/files/Classic/Megaman/MvC/m-mmmcsheet.gif";
 const background = new Image();
 background.src = "../images/boss-zone.png";
 const enemyImage = new Image();
