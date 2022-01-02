@@ -184,66 +184,64 @@ function drawSprite(img, sx, sy, sw, sh, dx, dy, dw, dh) {
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
 }
 
-// function animate() {
-//   // ctx.clearRect(0, 0, canvas.width, canvas.height);
-//   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-//   drawSprite(
-//     playerSpriteImage,
-//     player.width * player.frameX,
-//     player.height * player.frameY,
-//     // 0,
-//     // 0,
-//     player.width,
-//     player.height,
-//     player.x,
-//     player.y,
-//     player.width,
-//     player.height
-//   );
+function animate() {
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  drawSprite(
+    playerSpriteImage,
+    player.width * player.frameX,
+    player.height * player.frameY,
+    // 0,
+    // 0,
+    player.width,
+    player.height,
+    player.x,
+    player.y,
+    player.width,
+    player.height
+  );
 
-//   drawSprite(
-//     enemyImage,
-//     enemy.width * enemy.frameX,
-//     enemy.height * enemy.frameY,
-//     // 0,
-//     // 0,
-//     enemy.width,
-//     enemy.height,
-//     enemy.x,
-//     enemy.y,
-//     enemy.width,
-//     enemy.height
-//   );
-//   playerHealthbar.show(ctx);
-//   enemyHealthbar.show(ctx);
-//   ctx.font = "30px comic Sans";
-//   ctx.fillStyle = "gold";
-//   ctx.fillText("Mega-Man", 11, 21);
-//   ctx.font = "30px Arial";
-//   ctx.fillText("Dr.Willy", 680, 25);
+  drawSprite(
+    enemyImage,
+    enemy.width * enemy.frameX,
+    enemy.height * enemy.frameY,
+    // 0,
+    // 0,
+    enemy.width,
+    enemy.height,
+    enemy.x,
+    enemy.y,
+    enemy.width,
+    enemy.height
+  );
+  playerHealthbar.show(ctx);
+  enemyHealthbar.show(ctx);
+  ctx.font = "30px comic Sans";
+  ctx.fillStyle = "gold";
+  ctx.fillText("Mega-Man", 11, 21);
+  ctx.font = "30px Arial";
+  ctx.fillText("Dr.Willy", 680, 25);
 
-//   if (enemy.x < canvas.width + enemy.width) {
-//     enemy.x += enemy.speed;
-//   } else {
-//     enemy.x = 0 - enemy.width;
-//   }
-//   drawMissle();
-//   for (let i = 0; i < player.missle.length; i++) {
-//     player.m = player.missle[i];
-//   }
-//   playerMovementAnimate();
-//   movemissle();
-//   collisionenemy(enemy, player);
-//   collisionplayer(player.m, enemy);
-//   requestAnimationFrame(animate);
-// }
-// animate();
+  if (enemy.x < canvas.width + enemy.width) {
+    enemy.x += enemy.speed;
+  } else {
+    enemy.x = 0 - enemy.width;
+  }
+  drawMissle();
+  for (let i = 0; i < player.missle.length; i++) {
+    player.m = player.missle[i];
+  }
+  movemissle();
+  collisionenemy(enemy, player);
+  collisionplayer(player.m, enemy);
+  requestAnimationFrame(animate);
+}
+animate();
 
 window.addEventListener(
   "keydown",
   function (event) {
     if (event.defaultPrevented) {
-      player.moving = true;
       return; // Do nothing if the event was already processed
     }
 
@@ -252,27 +250,23 @@ window.addEventListener(
       case "ArrowDown":
         console.log("down");
         moveSpritedown();
-
         // Do something for "down arrow" key press.
         break;
       case "Up": // IE/Edge specific value
       case "ArrowUp":
         console.log("up");
         moveSpriteup();
-
         // Do something for "up arrow" key press.
         break;
       case "Left": // IE/Edge specific value
       case "ArrowLeft":
         console.log("left");
         moveSpriteleft();
-        player.moving = true;
         // Do something for "left arrow" key press.
         break;
       case "Right": // IE/Edge specific value
       case "ArrowRight":
         console.log("right");
-
         moveSpriteright();
         // Do something for "right arrow" key press.
         break;
@@ -290,7 +284,6 @@ window.addEventListener(
       case "Esc": // IE/Edge specific value
       case "Escape":
         // Do something for "esc" key press.
-        playerMissleAnimation();
         player.missle.push({
           width: 20,
           height: 20,
@@ -321,50 +314,7 @@ window.addEventListener(
   },
   true
 );
-window.addEventListener(
-  "keyup",
-  function (event) {
-    if (event.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
 
-    switch (event.key) {
-      case "Down": // IE/Edge specific value
-      case "ArrowDown":
-        // Do something for "down arrow" key press.
-        player.moving = false;
-        break;
-      case "Up": // IE/Edge specific value
-      case "ArrowUp":
-        player.moving = false;
-        // Do something for "up arrow" key press.
-        break;
-      case "Left": // IE/Edge specific value
-      case "ArrowLeft":
-        player.moving = false;
-        // Do something for "left arrow" key press.
-        break;
-      case "Right": // IE/Edge specific value
-      case "ArrowRight":
-        player.moving = false;
-        // Do something for "right arrow" key press.
-        break;
-      case "Enter":
-        // Do something for "enter" or "return" key press.
-        break;
-      case "Esc": // IE/Edge specific value
-      case "Escape":
-        // Do something for "esc" key press.
-        break;
-      default:
-        return; // Quit when this doesn't handle the key event.
-    }
-
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-  },
-  true
-);
 function drawMissle() {
   if (player.missle.length)
     for (let i = 0; i < player.missle.length; i++) {
@@ -403,7 +353,7 @@ function moveSpritedown(param) {
 function moveSpriteleft(param) {
   if (player.x > 5) {
     player.x -= player.speed;
-    player.frameX = 4;
+    player.frameX = 5;
     player.frameY = 23.2;
   }
 }
@@ -413,18 +363,6 @@ function moveSpriteright(param) {
     player.frameX = 0.9;
     player.frameY = 2.532;
   }
-}
-function playerMovementAnimate() {
-  if (player.frameX < 4 && player.moving) {
-    player.frameX++;
-  } else {
-    player.frameX = 0.5;
-    player.frameY = 8.7;
-  }
-}
-function playerMissleAnimation() {
-  player.frameX = 3.8;
-  player.frameY = 8.7;
 }
 
 /// Collision detection
@@ -462,73 +400,4 @@ function collisionenemy(a, b) {
 }
 // game.win();
 
-let fps, fpsInterval, startTime, now, then, elapsed;
-
-function startAnimation(fps) {
-  fpsInterval = 1000 / fps;
-  then = Date.now();
-  startTime = then;
-  animate();
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-  now = Date.now();
-  elapsed = now - then;
-  if (elapsed > fpsInterval) {
-    then = now - (elapsed % fpsInterval);
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    drawSprite(
-      playerSpriteImage,
-      player.width * player.frameX,
-      player.height * player.frameY,
-      // 0,
-      // 0,
-      player.width,
-      player.height,
-      player.x,
-      player.y,
-      player.width,
-      player.height
-    );
-
-    drawSprite(
-      enemyImage,
-      enemy.width * enemy.frameX,
-      enemy.height * enemy.frameY,
-      // 0,
-      // 0,
-      enemy.width,
-      enemy.height,
-      enemy.x,
-      enemy.y,
-      enemy.width,
-      enemy.height
-    );
-    playerHealthbar.show(ctx);
-    enemyHealthbar.show(ctx);
-    ctx.font = "30px comic Sans";
-    ctx.fillStyle = "gold";
-    ctx.fillText("Mega-Man", 11, 21);
-    ctx.font = "30px Arial";
-    ctx.fillText("Dr.Willy", 680, 25);
-
-    if (enemy.x < canvas.width + enemy.width) {
-      enemy.x += enemy.speed;
-    } else {
-      enemy.x = 0 - enemy.width;
-    }
-    drawMissle();
-    for (let i = 0; i < player.missle.length; i++) {
-      player.m = player.missle[i];
-    }
-    playerMovementAnimate();
-    movemissle();
-    collisionenemy(enemy, player);
-    collisionplayer(player.m, enemy);
-    requestAnimationFrame(animate);
-  }
-}
-// window.onload = setInterval(animate, 100 * 1000);
-
-startAnimation(1000);
+window.onload = setInterval(animate, 100 * 1000);
