@@ -9,8 +9,6 @@ const game = {
     canvas.classList.add("hide");
     canvas.classList.remove("hide");
   },
-  playerround: "",
-  enemyround: "",
 };
 
 const player = {
@@ -85,10 +83,11 @@ class Healthbar {
       player.alive = false;
       console.log(enemy.alive);
       console.log(game.playerround);
+      ctx.font = "200px comic Sans";
+      ctx.fillStyle = "orange";
+      ctx.fillText("game over", 10, 300);
       location.reload();
       alert("enemy wins");
-    } else if (enemy.alive && player.alive) {
-      alert("both dead");
     }
   }
   restartenemy() {
@@ -245,19 +244,10 @@ window.addEventListener(
           speedx: 20,
           speedy: 20,
         });
-        for (let i = 0; i < player.missle.length; i++) {
-          if (player.missle[i].x < canvas.width + player.missle[i].x.width) {
-            player.missle[i].x += player.speed;
-          } else {
-            player.missle[i].x += player.speed;
-          }
-        }
-
         break;
       default:
         return;
     }
-
     event.preventDefault();
   },
   true
