@@ -313,8 +313,6 @@ function collisionplayer(a, b) {
     console.log("collision");
 
     enemyHealthbar.updateHealthenemy();
-  } else {
-    console.log("no collision");
   }
 }
 
@@ -325,10 +323,7 @@ function collisionenemy(a, b) {
     a.y < b.y + b.height &&
     a.y + a.height > b.y
   ) {
-    console.log("collision");
     playerHealthbar.updateHealthplayer();
-  } else {
-    console.log("no collision");
   }
 }
 
