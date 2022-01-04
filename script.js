@@ -310,8 +310,6 @@ function collisionplayer(a, b) {
     a.y < b.y + b.height &&
     a.y + a.height > b.y
   ) {
-    console.log("collision");
-
     enemyHealthbar.updateHealthenemy();
   }
 }
