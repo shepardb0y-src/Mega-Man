@@ -1,4 +1,4 @@
-# Mega-Man boss battle ga,e
+# Mega-Man boss battle game
 
 My website is hosted on git hub pages the link is https://shepardb0y-src.github.io/Mega-Man/
 The vision for my game was to implemnt a version of megaman platform game on the pc but just do the boss battle stage.
